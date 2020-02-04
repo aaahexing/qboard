@@ -1,12 +1,9 @@
-# Create React App example with TypeScript
+# React App example with TypeScript
 
 ## How to use
 
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
-
 ```sh
-curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2 material-ui-master/examples/create-react-app-with-typescript
-cd create-react-app-with-typescript
+git clone git@github.com:aaahexing/qboard.git
 ```
 
 Install it and run:
