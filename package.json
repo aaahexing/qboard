@@ -5,11 +5,14 @@
     "dependencies": {
         "@material-ui/core": "latest",
         "@material-ui/icons": "^4.9.1",
+        "@material-ui/lab": "^4.0.0-alpha.41",
         "@types/markdown-to-jsx": "^6.9.1",
         "@types/react": "latest",
+        "@types/react-copy-to-clipboard": "^4.3.0",
         "@types/react-dom": "latest",
         "markdown-to-jsx": "^6.11.0",
         "react": "latest",
+        "react-copy-to-clipboard": "^5.0.2",
         "react-dom": "latest",
         "react-scripts": "latest",
         "typescript": "latest"
