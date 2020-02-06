@@ -14,6 +14,7 @@ const sampleQuestionData = [
   {
     title: "Markdown Example",
     category: ["Engineering"],
+    level: 3,
     description: `# This is Markdown
 #### You can edit me!
 [Markdown](http://daringfireball.net/projects/markdown/) lets you write content in a really natural way.
@@ -38,6 +39,7 @@ int main() {
   {
     title: "General settings",
     category: ["Data Structure", "Math"],
+    level: 1,
     description: `Donec placerat, lectus sed mattis semper, neque lectus feugiat
     lectus, varius pulvinar diam eros in elit. Pellentesque convallis
     laoreet laoreet.`,
@@ -47,6 +49,7 @@ int main() {
   {
     title: "Users",
     category: ["Algorithm", "Math"],
+    level: 2,
     description: `Donec placerat, lectus sed mattis semper, neque lectus feugiat
     lectus, varius pulvinar diam eros in elit. Pellentesque convallis
     laoreet laoreet.`,
@@ -55,6 +58,7 @@ int main() {
   {
     title: "Advanced settings",
     category: ["Math"],
+    level: 3.5,
     description: `Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
     sit amet egestas eros, vitae egestas augue. Duis vel est augue.`,
     solution: "Sample solution"
@@ -62,6 +66,7 @@ int main() {
   {
     title: "Personal data",
     category: ["Trick"],
+    level: 0.5,
     description: `Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
     sit amet egestas eros, vitae egestas augue. Duis vel est augue.`,
     solution: "Sample solution"
@@ -72,8 +77,10 @@ export default function QuestionPannels() {
   const classes = useStyles();
   const questionPannelsItems = sampleQuestionData.map(question => (
     <QuestionPannel
+      key={question.title}
       title={question.title}
       category={question.category}
+      level={question.level}
       description={question.description}
       solution={question.solution}
     />

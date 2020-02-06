@@ -1,5 +1,8 @@
 import React from "react";
 import Markdown from "markdown-to-jsx";
+import StarIcon from "@material-ui/icons/Star";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import StarHalfIcon from "@material-ui/icons/StarHalf";
 import {
   makeStyles,
   withStyles,
@@ -38,13 +41,16 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%"
     },
     title: {
-      fontSize: theme.typography.pxToRem(15),
+      fontSize: theme.typography.pxToRem(18),
       flexBasis: "50%",
       flexGrow: 1
     },
     category: {
       fontSize: theme.typography.pxToRem(15),
       color: theme.palette.text.secondary
+    },
+    level: {
+      paddingLeft: 6
     },
     description: {
       flexBasis: "60%",
@@ -68,6 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
 interface QuestionPannelProps {
   title: string;
   category: string[];
+  level: number;
   description: string;
   solution: string;
 }
@@ -77,23 +84,23 @@ export default function QuestionPannel(props: QuestionPannelProps) {
   const categoryTag = props.category.map(c => {
     return <Chip key={c} label={c} size="small" />;
   });
+  const levelTag = [<StarBorderIcon />, <StarHalfIcon />, <StarIcon />];
+  const normalizedLevel = Math.round(Math.max(1, Math.min(3, props.level)));
+  const levelIcon = levelTag[normalizedLevel - 1];
 
   return (
     <ExpansionPanel>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography className={classes.title}>{props.title}</Typography>
         {categoryTag}
+        <div className={classes.level}>{levelIcon}</div>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <div className={classes.description}>
-          <Typography>
-            <Markdown>{props.description}</Markdown>
-          </Typography>
+          <Markdown>{props.description}</Markdown>
         </div>
         <div className={classes.solution}>
-          <Typography variant="caption">
-            <Markdown>{props.solution}</Markdown>
-          </Typography>
+          <Markdown>{props.solution}</Markdown>
         </div>
       </ExpansionPanelDetails>
     </ExpansionPanel>
