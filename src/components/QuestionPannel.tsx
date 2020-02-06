@@ -1,4 +1,5 @@
 import React from "react";
+import Markdown from "markdown-to-jsx";
 import {
   makeStyles,
   withStyles,
@@ -85,17 +86,13 @@ export default function QuestionPannel(props: QuestionPannelProps) {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <div className={classes.description}>
-          <Typography>{props.description}</Typography>
+          <Typography>
+            <Markdown>{props.description}</Markdown>
+          </Typography>
         </div>
         <div className={classes.solution}>
           <Typography variant="caption">
-            {props.solution}
-            <br />
-            Select your destination of choice
-            <br />
-            <a href="#secondary-heading-and-columns" className={classes.link}>
-              Learn more
-            </a>
+            <Markdown>{props.solution}</Markdown>
           </Typography>
         </div>
       </ExpansionPanelDetails>

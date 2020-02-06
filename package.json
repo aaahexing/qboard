@@ -5,8 +5,10 @@
     "dependencies": {
         "@material-ui/core": "latest",
         "@material-ui/icons": "^4.9.1",
+        "@types/markdown-to-jsx": "^6.9.1",
         "@types/react": "latest",
         "@types/react-dom": "latest",
+        "markdown-to-jsx": "^6.11.0",
         "react": "latest",
         "react-dom": "latest",
         "react-scripts": "latest",
