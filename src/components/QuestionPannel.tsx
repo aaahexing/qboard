@@ -59,10 +59,11 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1
     },
     category: {
-      fontSize: theme.typography.pxToRem(15),
+      alignSelf: "center",
       color: theme.palette.text.secondary
     },
     level: {
+      alignSelf: "center",
       paddingLeft: 6
     },
     description: {
@@ -104,7 +105,6 @@ export default function QuestionPannel(props: QuestionPannelProps) {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
@@ -121,6 +121,7 @@ export default function QuestionPannel(props: QuestionPannelProps) {
         <Tooltip title="Copy">
           <CopyToClipboard text={props.title}>
             <IconButton
+              size="small"
               onClick={event => {
                 handleClick();
                 event.stopPropagation();
@@ -132,13 +133,12 @@ export default function QuestionPannel(props: QuestionPannelProps) {
         </Tooltip>
         <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success">
-            Question's title copied.
+            '{props.title}' copied.
           </Alert>
         </Snackbar>
 
         <Typography className={classes.title}>{props.title}</Typography>
         {categoryTag}
-        <Divider orientation="vertical" />
         <div className={classes.level}>{levelIcon}</div>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
