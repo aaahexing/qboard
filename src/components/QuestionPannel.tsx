@@ -72,13 +72,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexBasis: "50%",
       borderLeft: `1px solid ${theme.palette.divider}`,
       padding: theme.spacing(1, 2)
-    },
-    link: {
-      color: theme.palette.primary.main,
-      textDecoration: "none",
-      "&:hover": {
-        textDecoration: "underline"
-      }
     }
   })
 );
