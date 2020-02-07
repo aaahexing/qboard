@@ -5,7 +5,6 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import StarHalfIcon from "@material-ui/icons/StarHalf";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-import EditIcon from "@material-ui/icons/Edit";
 import {
   makeStyles,
   withStyles,
@@ -14,7 +13,6 @@ import {
 } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -157,9 +155,6 @@ export default function QuestionPannel(props: QuestionPannelProps) {
         </div>
       </ExpansionPanelDetails>
       <Divider />
-      <ExpansionPanelActions>
-        <EditIcon />
-      </ExpansionPanelActions>
     </ExpansionPanel>
   );
 }
