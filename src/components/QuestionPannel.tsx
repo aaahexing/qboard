@@ -67,11 +67,11 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: 6
     },
     description: {
-      flexBasis: "60%",
+      flexBasis: "50%",
       padding: theme.spacing(1, 2)
     },
     solution: {
-      flexBasis: "40%",
+      flexBasis: "50%",
       borderLeft: `1px solid ${theme.palette.divider}`,
       padding: theme.spacing(1, 2)
     },
@@ -87,7 +87,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface QuestionPannelProps {
   title: string;
-  category: string[];
+  author: string;
+  categories: string;
   level: number;
   description: string;
   solution: string;
@@ -108,7 +109,7 @@ export default function QuestionPannel(props: QuestionPannelProps) {
     setOpen(false);
   };
 
-  const categoryTag = props.category.map(c => {
+  const categoryTag = props.categories.split(",").map(c => {
     return <Chip key={c} label={c} size="small" />;
   });
   const levelTag = [<StarBorderIcon />, <StarHalfIcon />, <StarIcon />];
@@ -136,14 +137,20 @@ export default function QuestionPannel(props: QuestionPannelProps) {
             '{props.title}' copied.
           </Alert>
         </Snackbar>
-
         <Typography className={classes.title}>{props.title}</Typography>
         {categoryTag}
         <div className={classes.level}>{levelIcon}</div>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <div className={classes.description}>
-          <Markdown>{props.description}</Markdown>
+          <Markdown>
+            {props.description +
+              "\n\n#### Author: [" +
+              props.author +
+              "](" +
+              props.author +
+              ")\n"}
+          </Markdown>
         </div>
         <div className={classes.solution}>
           <Markdown>{props.solution}</Markdown>

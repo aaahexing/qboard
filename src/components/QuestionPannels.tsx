@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import QuestionPannel from "./QuestionPannel";
+import { useAsync } from "react-use";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -10,10 +11,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+interface FetchedQuestion {
+  title: string;
+  author: string;
+  categories: string;
+  level: number;
+  description: string;
+  solution: string;
+}
+
 const sampleQuestionData = [
   {
     title: "Markdown Example",
-    category: ["Engineering"],
+    author: "engineer@pony.ai",
+    categories: "Engineering",
     level: 3,
     description: `# This is Markdown
 #### You can edit me!
@@ -35,55 +46,51 @@ You can even include custom React components if you declare them in the "overrid
 int main() {
   printf("Hello, markdown!\\n");
 }\`\`\``
-  },
-  {
-    title: "General settings",
-    category: ["Data Structure", "Math"],
-    level: 1,
-    description: `Donec placerat, lectus sed mattis semper, neque lectus feugiat
-    lectus, varius pulvinar diam eros in elit. Pellentesque convallis
-    laoreet laoreet.`,
-    solution: `Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-    Aliquam eget maximus est, id dignissim quam Sample solution`
-  },
-  {
-    title: "Users",
-    category: ["Algorithm", "Math"],
-    level: 2,
-    description: `Donec placerat, lectus sed mattis semper, neque lectus feugiat
-    lectus, varius pulvinar diam eros in elit. Pellentesque convallis
-    laoreet laoreet.`,
-    solution: "Sample solution"
-  },
-  {
-    title: "Advanced settings",
-    category: ["Math"],
-    level: 3.5,
-    description: `Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
-    sit amet egestas eros, vitae egestas augue. Duis vel est augue.`,
-    solution: "Sample solution"
-  },
-  {
-    title: "Personal data",
-    category: ["Trick"],
-    level: 0.5,
-    description: `Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
-    sit amet egestas eros, vitae egestas augue. Duis vel est augue.`,
-    solution: "Sample solution"
   }
 ];
 
 export default function QuestionPannels() {
   const classes = useStyles();
-  const questionPannelsItems = sampleQuestionData.map(question => (
-    <QuestionPannel
-      key={question.title}
-      title={question.title}
-      category={question.category}
-      level={question.level}
-      description={question.description}
-      solution={question.solution}
-    />
-  ));
-  return <div className={classes.root}>{questionPannelsItems}</div>;
+
+  const state = useAsync(async () => {
+    const response = await fetch(
+      "http://10.0.0.10:8000/api/questions/?format=json"
+    );
+    const result = await response.text();
+    return result;
+  }, []);
+
+  return (
+    <div className={classes.root}>
+      {state.loading ? (
+        <div>Loading...</div>
+      ) : state.error ? (
+        <div>Error: {state.error.message}</div>
+      ) : state.value ? (
+        JSON.parse(state.value).map((question: FetchedQuestion) => (
+          <QuestionPannel
+            key={question.title}
+            title={question.title}
+            author={question.author}
+            categories={question.categories}
+            level={question.level}
+            description={question.description}
+            solution={question.solution}
+          />
+        ))
+      ) : (
+        sampleQuestionData.map(question => (
+          <QuestionPannel
+            key={question.title}
+            title={question.title}
+            author={question.author}
+            categories={question.categories}
+            level={question.level}
+            description={question.description}
+            solution={question.solution}
+          />
+        ))
+      )}
+    </div>
+  );
 }
